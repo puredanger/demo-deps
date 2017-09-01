@@ -10,9 +10,5 @@
 
    ;; benchmarking
    :bench {:extra-deps {criterium {:type :mvn :version "0.4.4"}}}
-
-   ;; clojure version testing
-   :1.9 {:override-deps {org.clojure/clojure {:type :mvn :version "1.9.0-alpha17"}}}
-   :1.8 {:override-deps {org.clojure/clojure {:type :mvn :version "1.8.0"}}}
  }
 }
