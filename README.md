@@ -20,10 +20,10 @@ The deps.edn file contains a basic setup and some common aliases:
    :test {:extra-paths ["test"]}
 
    ;; test.check 
-   :test {:extra-deps {org.clojure/test.check {:type :mvn :version "0.9.0"}}}
+   :test {:extra-deps {org.clojure/test.check {:mvn/version "0.9.0"}}}
 
    ;; benchmarking
-   :bench {:extra-deps {criterium {:type :mvn :version "0.4.4"}}}
+   :bench {:extra-deps {criterium {:mvn/version "0.4.4"}}}
  }
 }
 ```
