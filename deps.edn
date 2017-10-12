@@ -1,12 +1,16 @@
 {
+ :paths ["src"]
+
  :deps {
-   local/src {:type :file :path "src"}
-   clj-time {:type :mvn :version "0.14.0"}
+   clj-time {:mvn/version "0.14.0"}
  }
+
  :aliases {
-   ;; running tests
-   :test {:extra-deps {local/test-src {:type :file :path "test"}
-                       org.clojure/test.check {:type :mvn :version "0.9.0"}}}
+   ;; test src
+   :test {:extra-paths ["test"]}
+
+   ;; test.check lib 
+   :check {:extra-deps {org.clojure/test.check {:mvn/version "0.9.0"}}}
 
    ;; benchmarking
    :bench {:extra-deps {criterium {:type :mvn :version "0.4.4"}}}

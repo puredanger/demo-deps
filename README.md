@@ -9,14 +9,18 @@ The deps.edn file contains a basic setup and some common aliases:
 
 ```clojure
 {
+ :paths ["src"]
+
  :deps {
-   local/src {:type :file :path "src"}
-   clj-time {:type :mvn :version "0.14.0"}
+   clj-time {:mvn/version "0.14.0"}
  }
+
  :aliases {
-   ;; running tests
-   :test {:extra-deps {local/test-src {:type :file :path "test"}
-                       org.clojure/test.check {:type :mvn :version "0.9.0"}}}
+   ;; test src
+   :test {:extra-paths ["test"]}
+
+   ;; test.check 
+   :test {:extra-deps {org.clojure/test.check {:type :mvn :version "0.9.0"}}}
 
    ;; benchmarking
    :bench {:extra-deps {criterium {:type :mvn :version "0.4.4"}}}
@@ -36,7 +40,7 @@ To run a repl, call `clj` with no other arguments. This will create and cache th
 
 ```shell
 $ clj
-Clojure 1.9.0-alpha19
+Clojure 1.9.0-beta1
 user=> (require '[demo :as demo] '[clj-time.core :as time])
 nil
 user=> (str (demo/tomorrow (time/now)))
@@ -60,16 +64,16 @@ To run these tests you need to include two additional things on your classpath:
 1) The test source directory (here, `test`)
 2) The `test.check` library
 
-These are added in the `:test` alias and can be added to the classpath by using the `-R` flag to include the `:test` as a resolve-args alias:
+These are added in the `:test` and `:check` aliases and can be added to the classpath by activating the aliases:
 
 ```shell
-clj -R:test
+clj -R:check -C:test
 ```
 
 However, we don't really want a REPL, we just want to run the tests. The `clj` script is running `clojure.main` and you can get the full rundown on available options with `clj -h`. One option is `-e` which can be used to run one or more expressions specified as an argument. That's sufficient for our needs - just loading the namespace is enough to run the tests. 
 
 ```shell
-$ clj -R:test -e "(require 'test-demo) (shutdown-agents)"
+$ clj -R:check -C:test -e "(require 'test-demo) (shutdown-agents)"
 
 {:sym demo/days-between}
 {:sym demo/tomorrow}
@@ -83,7 +87,7 @@ If you want to benchmark some code, you might include an external library just f
 
 ```shell
 $ clj -R:bench
-Clojure 1.9.0-alpha19
+Clojure 1.9.0-beta1
 user=> (use 'criterium.core 'demo 'clj-time.core)
 user=> (def d (clj-time.core/now))
 user=> (quick-bench (tomorrow d))
