@@ -2,7 +2,7 @@
  :paths ["src"]
 
  :deps {
-   clj-time {:mvn/version "0.14.0"}
+   clj-time {:mvn/version "0.14.2"}
  }
 
  :aliases {
