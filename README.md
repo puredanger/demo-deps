@@ -8,14 +8,13 @@ The functions use the clj-time library.
 The deps.edn file contains a basic setup and some common aliases:
 
 ```clojure
-{
- :paths ["src"]
+{:paths ["src"]
 
- :deps {
-   clj-time {:mvn/version "0.14.2"}
- }
+ :deps
+ {clj-time {:mvn/version "0.14.2"}}
 
- :aliases {
+ :aliases
+ {
    ;; test src
    :test {:extra-paths ["test"]}
 
@@ -23,8 +22,7 @@ The deps.edn file contains a basic setup and some common aliases:
    :test {:extra-deps {org.clojure/test.check {:mvn/version "0.9.0"}}}
 
    ;; benchmarking
-   :bench {:extra-deps {criterium {:mvn/version "0.4.4"}}}
- }
+   :bench {:extra-deps {criterium {:mvn/version "0.4.4"}}}}
 }
 ```
 
